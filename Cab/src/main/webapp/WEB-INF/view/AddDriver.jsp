@@ -38,7 +38,7 @@
 	</div>
 	<h3 align="center" style="color: red;">${warning}</h3>
 	<a id="home" href="home">Home</a>
-	<form  action="driverMain" METHOD=POST modelAttribute="todo">
+	<form  action="driverMain" METHOD="POST" >
 	<table align="center" cellspacing="5">
 	<tr><td>Driver Id</td><td><input type="text" name=driverId ></td></tr>
 	<tr><td>Vehicle Number</td><td><input type="text" name=vehicleNumber autofocus></td></tr>

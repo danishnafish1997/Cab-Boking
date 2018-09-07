@@ -1,5 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+   
+<%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%> 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -13,11 +17,28 @@
 	</div>
 	<div align="center">
 	<h3 align="center" style="color: red;">${warning}</h3>
-	<form action="updateMain">
-	Vehicle Number <input type="text" name="vehicleNumber"></input>
-	<input type="submit" value="submit">
-	</form>
-	</div>
-	<a href="home">GO to home</a>
+	
+	<form:form  action="updateVehicle" METHOD="post" modelAttribute="vehicle">
+	<form:hidden path="vehicleNumber"/>
+	            <fieldset class="form-group">
+						<form:label path="VehicleName">Vehicle Name</form:label><br>
+						<form:input type="text" path="vehicleName"
+							class="form-control" required="required" />
+							<form:errors path="vehicleName" cssClass="text-warning"></form:errors>
+				</fieldset>
+				
+				<fieldset class="form-group">
+						<form:label path="vehicleType">vehicle Type</form:label><br>
+						<form:input type="text" path="vehicleType"
+							class="form-control" required="required" />
+							<form:errors path="vehicleType" cssClass="text-warning"></form:errors>
+					</fieldset>
+	
+	               
+	            <button type=submit class="btn btn-success">
+						Add
+					</button>
+  </form:form>
+	
 </body>
 </html>

@@ -48,11 +48,14 @@
 </style>
 </head>
 <body>
+
+    
 	<div id ="main" style="text-align:center; padding:5px;background-color: Teal;">
 	<h1 align="center" style="margin-top:2%;">Hello Admin</h1>
 	<h1 align="center" style="margin-left:21%;"> Welcome<a href="logout" style="color: #cc0000;font-size:22px; margin-left:18%;">Logout</a></h1>
 	
 	</div>
+	
 	${message}
 	<div>
 	  <ul class="menu">
@@ -60,17 +63,13 @@
 	      <a href="#">Vehicle</a>
 	      <ul>
 	        <li><a href="AddVehicle">Add Vehicle</a></li>
-	        <li><a href="DeleteVehicle">Delete Vehicle</a></li>
-	        <li><a href="UpdateVehicle">Modify Vehicle</a></li>
-	        <li><a href="ViewVehicle">View Vehicle</a></li>
+	        <li><a href="getAllVehicles">View Vehicle</a></li>
 	      </ul>
 	    </li>
 	    <li>
 	      <a href="#">Driver</a>
 	      <ul>
 	        <li><a href="AddDriver">Add Driver</a></li>
-	        <li><a href="deleteDriver">Delete Driver</a></li>
-	        <li><a href="updateDriver">Modify Driver</a></li>
 	        <li><a href="getAllDrivers">View Driver</a></li>
 	      </ul>
 	    </li>

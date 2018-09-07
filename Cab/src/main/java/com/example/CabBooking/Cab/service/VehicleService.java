@@ -19,7 +19,7 @@ public class VehicleService {
 	 
 	 public List<VehicleBean> getAllVehicles(){  
 	        List<VehicleBean> vehicles = new ArrayList<>();  
-	        vehicleRepository.findAll().forEach(vehicles::add);  
+	        vehicles = vehicleRepository.findAll();  
 	        return vehicles;  
 	    }
 	 

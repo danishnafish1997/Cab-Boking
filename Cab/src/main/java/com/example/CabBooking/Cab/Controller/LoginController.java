@@ -34,7 +34,17 @@ public class LoginController {
 		 
 		 String loginid = map1.get("loginid");
 		 String password = map2.get("password");
-		 if( repo.existsById(loginid)){
+		 if((loginid == null) || password == null){
+			 ModelAndView mav = new ModelAndView("index");
+			 mav.addObject("message", "Please check loginid or password");
+		 }
+		 else if(loginid.equals("admin") && password.equals("password")){
+			 httpSession.setAttribute("admin", "admin");
+			 ModelAndView mav = new ModelAndView("Admin");
+			 mav.addObject("admin", loginid);
+			 return mav;
+		 }
+		 else if( repo.existsById(loginid)){
 			 LoginBean user = repo.findById(loginid).get();
 			 if(user.getLoginid().equals(loginid) && user.getPassword().equals(password)){
 				 httpSession.setAttribute("loginid", loginid);
@@ -64,7 +74,7 @@ public class LoginController {
 				return mav;
 		  }
 
-		
+		 
 		UserBean userBean=new UserBean();
 		userBean.setLoginid(map.get("loginid"));
 		userBean.setUserName(map.get("userName"));

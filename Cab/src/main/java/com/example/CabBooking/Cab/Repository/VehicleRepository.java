@@ -1,12 +1,9 @@
 package com.example.CabBooking.Cab.Repository;
 
-import java.util.Optional;
-
-import org.springframework.data.repository.CrudRepository;
-
+import org.springframework.data.jpa.repository.JpaRepository;
 import com.example.CabBooking.Cab.Bean.VehicleBean;
 
-public interface VehicleRepository extends CrudRepository<VehicleBean,String>{
+public interface VehicleRepository extends JpaRepository<VehicleBean,String>{
 
 	//VehicleBean find(String vehicleNumber);
 
