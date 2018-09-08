@@ -7,6 +7,8 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<link href="webjars/bootstrap/3.3.6/css/bootstrap.min.css"
+	rel="stylesheet">
 <title>Register</title>
 <style type="text/css">
 #main{
@@ -37,21 +39,49 @@ color: #fff;
 	<h3 align="center" style="color: red;">${message}</h3>
 	<h1 align="center" style="color: #fff; margin-top: 2%; margin-bottom: 2%;">Welcome</h1>
 	</div>
-	<form action="registerPage" METHOD=POST >
-	<table align="center" cellspacing="10">
-	<tr><td> Enter LoginID</td><td><input type="text" class="form-control" name="loginid"  required="required" ></td>
-	<td>${login_id_message}</td></tr>
-	<tr><td>Password</td><td><input type="password" class="form-control" name="password" required = "required"/></td>
-	<td>${warning}</td></tr>
-	<tr><td>Confirm Password</td><td><input type="password" class="form-control" name=con_password required="required"/></td></tr>
-	<tr><td>User Name</td><td><input type="text" class="form-control" name=userName required="required"/></td></tr>
-   
-   <tr> <td> ${message}</td></tr>
-<tr><td>Address</td><td><input type="text" class="form-control" name=userAddress requird="required"/></td></tr>
-	<tr><td>Mobile Number</td><td><input type="text" class="form-control" name=userContactNumber required="required"/></td></tr>
-	<tr><td><input type="hidden" name="userType" " value="C" required="required"/></td></tr>
-	<tr><td></td><td><input type="submit" value="Submit" style="margin: 6%; margin-left: 33%; background-color: #5cb85c; color:#fff; border-color: #4cae4c; padding:3%; font-size:15px;"></td></tr>
-	</table>
-	</form>
+	<div class="container center" ><br>
+	<form:form action="registerPage" METHOD="POST" modelAttribute="loginBean">
+	<form:hidden path="loginid"/>
+	  <fieldset>
+	    <form:label path="email">Email</form:label><br/>
+	    <form:input path="email" type="email" placeholder="abc@gmail.com" required="required"/>
+	    <form:errors path="email"></form:errors>
+	  </fieldset><br>
+	  
+	  <fieldset>
+	    <form:label path="password">Password</form:label><br/>
+	    <form:password path="password"/>
+	    <form:errors path="password"/>
+	  </fieldset><br>
+	  
+	  <fieldset>
+	    <form:label path="userName">Name</form:label><br/>
+	    <form:input path="userName" type="text" placeholder="abc" required="required"/>
+	    <form:errors path="userName"></form:errors>
+	  </fieldset><br>
+	  
+	  <fieldset>
+	    <form:label path="userAddress">Address</form:label><br>
+	    <form:input path="userAddress" type="text" placeholder="abc colony" required="required"/>
+	    <form:errors path="userAddress"></form:errors>
+	  </fieldset><br>
+	  
+	  <fieldset>
+	    <form:label path="userContactNumber">Phone No.</form:label><br>
+	    <form:input path="userContactNumber" type="text" placeholder="1234567890" required="required"/>
+	    <form:errors path="userContactNumber"></form:errors>
+	  </fieldset><br>
+	  
+	  <fieldset>
+	    <form:label path="userType">User Type</form:label><br>
+	    <form:input path="userType" type="text" placeholder="abc" required="required"/>
+	    <form:errors path="userType"></form:errors>
+	  </fieldset><br>
+	  <form:button class="btn btn-success">submit</form:button>
+	</form:form>
+	</div>
+	
+	<script src="webjars/jquery/1.9.1/jquery.min.js"></script>
+<script src="webjars/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 </body>
 </html>

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>    
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -39,10 +40,10 @@
 	<div>
 	<div style="width: 46%; height:246px; font-size: 20px; background-color:CadetBlue ; color:#fff; float: left; padding: 2%"></div>
 	<div style="width: 46%; height: 246px; text-align:center; background-color:CadetBlue ; color:red; float: right; padding: 2%;">
-	<form action="login" METHOD=POST>
+	<form action="login" METHOD="POST">
 	<table align="center" cellspacing="5">
-	<tr><td>LoginID</td><td><input type="text" name=loginid></td></tr>
-	<tr><td>Password</td><td><input type="text" name=password></td></tr>
+	<tr><td>LoginID</td><td><input type="text" name="email" /></td></tr>
+	<tr><td>Password</td><td><input type="password" name="password"  /></td></tr>
 	<tr><td></td><td><input type="submit" id="submit" value="submit"></td></tr>
 	</table>
 	</form>

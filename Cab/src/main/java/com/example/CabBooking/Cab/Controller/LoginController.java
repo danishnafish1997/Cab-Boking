@@ -3,8 +3,11 @@ package com.example.CabBooking.Cab.Controller;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -32,22 +35,23 @@ public class LoginController {
 	@RequestMapping(value="/login" , method=RequestMethod.POST)
 	public ModelAndView login( HttpSession httpSession, @RequestParam Map<String,String> map1,@RequestParam Map<String,String> map2) {
 		 
-		 String loginid = map1.get("loginid");
+		 String email = map1.get("email");
 		 String password = map2.get("password");
-		 if((loginid == null) || password == null){
+		 System.out.println(email);
+		 if((email == null) || password == null){
 			 ModelAndView mav = new ModelAndView("index");
-			 mav.addObject("message", "Please check loginid or password");
+			 mav.addObject("message", "Please check your credantial");
 		 }
-		 else if(loginid.equals("admin") && password.equals("password")){
-			 httpSession.setAttribute("admin", "admin");
+		 else if(email.equals("admin@123") && password.equals("password")){
+			 httpSession.setAttribute("admin", "admin@123");
 			 ModelAndView mav = new ModelAndView("Admin");
-			 mav.addObject("admin", loginid);
+			 mav.addObject("admin", email);
 			 return mav;
 		 }
-		 else if( repo.existsById(loginid)){
-			 LoginBean user = repo.findById(loginid).get();
-			 if(user.getLoginid().equals(loginid) && user.getPassword().equals(password)){
-				 httpSession.setAttribute("loginid", loginid);
+		 else if( repo.existsByEmail(email)){
+			 LoginBean user = repo.findByEmail(email);
+			 if(user.getEmail().equals(email) && user.getPassword().equals(password)){
+				 httpSession.setAttribute("emailId", email);
 				 ModelAndView mav = new ModelAndView("Customer");
 				 return mav;
 			 }
@@ -60,45 +64,22 @@ public class LoginController {
 	}
 	
 	@RequestMapping(value="/register",method=RequestMethod.GET)
-	public ModelAndView register() {
+	public ModelAndView register(ModelMap model) {
+		model.put("loginBean", new LoginBean());
 		ModelAndView mav=new ModelAndView("register");
 		return mav;
 	}
 	
 	@RequestMapping(value="/registerPage",method=RequestMethod.POST)
-	public ModelAndView registerPage(@RequestParam Map<String,String> map) {
-		
-		 if(map.get("password").equals(map.get("con_password"))==false){
-			  ModelAndView mav = new ModelAndView("register");
-				mav.addObject("warning", "Please make the password same");
-				return mav;
-		  }
-
-		 
-		UserBean userBean=new UserBean();
-		userBean.setLoginid(map.get("loginid"));
-		userBean.setUserName(map.get("userName"));
-		userBean.setUserAddress(map.get("userAddress"));
-		userBean.setUserContactNumber(map.get("userContactNumber"));
-	
-		LoginBean loginBean=new LoginBean();
-		loginBean.setLoginid(map.get("loginid"));
-		loginBean.setPassword(map.get("password"));
-		loginBean.setUserType(map.get("userType"));
-		
-		
-		if(repo.existsById(map.get("loginid"))) {
-		ModelAndView mav=new ModelAndView("register");
-		mav.addObject("message","User already exist");
-		return mav;
-		}
-		else {
-			repo.save(loginBean);
-			repo.save(userBean);
-			ModelAndView mav=new ModelAndView("index");
-			mav.addObject("message", "You have registered succeddfully");
+	public ModelAndView registerPage(ModelMap model,@Valid LoginBean loginBean,BindingResult result) {
+		System.out.println(repo.existsByEmail(loginBean.getEmail()) + loginBean.getEmail());
+		if(result.hasErrors()){
+			ModelAndView mav = new ModelAndView("register");
 			return mav;
 		}
+		repo.save(loginBean);
+		ModelAndView mav = new ModelAndView("index");
+		return mav;
 	}
 	
 	@RequestMapping(value="/logout",method=RequestMethod.GET)
