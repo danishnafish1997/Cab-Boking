@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.example.CabBooking.Cab.Bean.LoginBean;
-import com.example.CabBooking.Cab.Bean.UserBean;
 import com.example.CabBooking.Cab.Repository.LoginRepository;
 
 @RestController
@@ -83,8 +82,8 @@ public class LoginController {
 	
 	@RequestMapping(value="/logout",method=RequestMethod.GET)
 	public ModelAndView logout(HttpSession httpSession) {
-		ModelAndView mav=new ModelAndView("index");
 		httpSession.invalidate();
+		ModelAndView mav=new ModelAndView("index");
 		mav.addObject("message","Logged out successfully");
 		return mav;
 	}

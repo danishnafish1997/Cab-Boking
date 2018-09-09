@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>    
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -48,6 +49,10 @@
 </style>
 </head>
 <body>
+   <c:if test="${sessionScope.user != null}">
+     <c:redirect url="http://localhost:8200/"></c:redirect>
+   </c:if>
+   
 	<div id="main" style="text-align:center; padding:5px;background-color: Teal;">
 	<h1 align="center" style="margin-top:2%;">Hello Customer <!--%=session.getAttribute("loginid") %  --></h1>
 	<h1 align="center" style="margin-left:21%;">Welcome<a href="logout" style="color: #cc0000;font-size:22px; margin-left:18%;">Logout</a></h1>
@@ -66,8 +71,8 @@
 	    <li>
 	      <a href="#">Your Profile</a>
 	      <ul>
-	        <li><a href="#">View Profile</a></li>
-	        <li><a href="#">Edit Profile</a></li>
+	        <li><a href="viewProfile?id=${user}">View Profile</a></li>
+	        <li><a href="editProfile?id=${user}">Edit Profile</a></li>
 	      </ul>
 	    </li>
 	  </ul>

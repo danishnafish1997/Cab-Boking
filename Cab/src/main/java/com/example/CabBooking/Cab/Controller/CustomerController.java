@@ -1,31 +1,28 @@
 package com.example.CabBooking.Cab.Controller;
 
-import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.Map;
-
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.support.incrementer.DataFieldMaxValueIncrementer;
+import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.example.CabBooking.Cab.Bean.BookingBean;
-import com.example.CabBooking.Cab.Bean.SearchBean;
-import com.example.CabBooking.Cab.Bean.VehicleBean;
-import com.example.CabBooking.Cab.service.CustomerService;
+import com.example.CabBooking.Cab.Bean.LoginBean;
+import com.example.CabBooking.Cab.Repository.LoginRepository;
 
 @RestController
 public class CustomerController {
 
+
+	
 	@Autowired
-	CustomerService customerService;
-	//why have it when you're not using it?
-	private DataFieldMaxValueIncrementer valueIncrementer;
+	LoginRepository repo;
 	
 	@RequestMapping(value="/CustomerHomePage",method = RequestMethod.GET)
 	   public ModelAndView CustomerHomePage() {
@@ -51,68 +48,37 @@ public class CustomerController {
 	   }
 
 	
-	@RequestMapping(value="/search",method=RequestMethod.POST)
-	public ModelAndView search(SearchBean searchBean,HttpSession session) throws ParseException {
-		System.out.println("Destinate is"+ searchBean.getDestination());
-		if(searchBean.getDestination().isEmpty()) {
-			ModelAndView mav=new ModelAndView("BookCabNow");
-			mav.addObject("message","Please enter the destination");
-		}
-		session.setAttribute("searchBean", searchBean);
-		ArrayList<Object[]> vehicleBeans=new ArrayList<Object[]>();
-			vehicleBeans= customerService.search(searchBean);
-		
-		if(vehicleBeans==null) {
-			ModelAndView mav=new ModelAndView("BookCabNow");
-			mav.addObject("message","Please enter correct soure and destination");
-			return mav;
-		}
-		 if(vehicleBeans.size()==0){
-			  ModelAndView model = new ModelAndView("BookCabNow");
-				model.addObject("warning", "Sorry! vehicle with such specifications is not present, Please try another search");
-				return model;
-		  }
-		 else {
-			 ModelAndView mav=new ModelAndView("SearchResults");
-			 mav.addObject("cabList",vehicleBeans);
-			 return mav;
-		 }
-	}
 	
 	
-	@RequestMapping(value="/ConfirmBooking",method = RequestMethod.GET)
-	 public ModelAndView ConfirmBooking(@RequestParam Map<String,Object> map,HttpSession session) {
-		   ModelAndView mav = new ModelAndView("ConfirmBooking");
-		   mav.addObject("vehicleDetails",map.get("vehicleId"));
-		  String vehicleId=(String)map.get("vehicleId");
-		  VehicleBean vehicleBean=customerService.getVehicle(vehicleId);
-		   mav.addObject("vehicleDetails",vehicleBean);
-
-		   SearchBean searchBean=(SearchBean)session.getAttribute("searchbean");
-
-		   mav.addObject("searchDetails",searchBean);
-		   ArrayList<Object[]> routeDetails = customerService.giveRouteDetails(searchBean);
-		   mav.addObject("routedetails",routeDetails);
-			return mav;
-	   }
-	
-	@RequestMapping(value="/BookingHistory",method = RequestMethod.GET)
-	 public ModelAndView BookingHistory(HttpSession session)
-	{
-		ModelAndView mav = new ModelAndView("BookingHistory");
-		 ArrayList<BookingBean> bookingBean=customerService.bookinghistory(session);
-		mav.addObject("bookingBean",bookingBean);
+	   
+	@RequestMapping(value="/viewProfile",method=RequestMethod.GET)
+	public ModelAndView profile(HttpSession httpSession) {
+		String id = httpSession.getAttribute("user").toString();
+		LoginBean customer = repo.findByEmail(id);
+		ModelAndView mav = new ModelAndView("viewProfile");
+		mav.addObject("customer", customer);
 		return mav;
 	}
 	
-	@RequestMapping(value="/BookedTicketsAll",method = RequestMethod.GET)
-	 public ModelAndView BookedTicketsAll()
-	{
-		ModelAndView mav = new ModelAndView("CustomerBookingHistory");
-	 ArrayList<BookingBean> bookingBean=customerService.bookingHistoryCustomer();
-		mav.addObject("bookingbeans",bookingBean);
+	@RequestMapping(value="/editProfile",method=RequestMethod.GET)
+    public ModelAndView editProfile(@RequestParam long loginid,ModelMap model) {
+		LoginBean loginBean = new LoginBean();
+		loginBean = repo.findById(loginid).get();
+		System.out.println(loginid);
+		ModelAndView mav = new ModelAndView("editProfile");
+		model.put("loginBean", loginBean);
 		return mav;
 	}
-
-
+	
+	@RequestMapping(value="/editProfile",method=RequestMethod.POST)
+    public ModelAndView editProfil(ModelMap model,@Valid LoginBean loginBean,BindingResult result) {
+		if(result.hasErrors()) {
+			ModelAndView mav = new ModelAndView("editProfile");
+			return mav;
+		}
+		loginBean.setEmail(loginBean.getEmail());
+		repo.save(loginBean);
+		ModelAndView mav = new ModelAndView("redirect:/viewProfile");
+		return mav;
+	}
 }
