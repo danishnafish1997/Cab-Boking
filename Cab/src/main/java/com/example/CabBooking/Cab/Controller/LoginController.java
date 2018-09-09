@@ -37,13 +37,12 @@ public class LoginController {
 		 
 		 String email = map1.get("email");
 		 String password = map2.get("password");
-		 System.out.println(email);
+		 httpSession.setAttribute("user", email);
 		 if((email == null) || password == null){
 			 ModelAndView mav = new ModelAndView("index");
 			 mav.addObject("message", "Please check your credantial");
 		 }
 		 else if(email.equals("admin@123") && password.equals("password")){
-			 httpSession.setAttribute("admin", "admin@123");
 			 ModelAndView mav = new ModelAndView("Admin");
 			 mav.addObject("admin", email);
 			 return mav;

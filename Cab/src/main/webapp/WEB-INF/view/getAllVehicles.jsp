@@ -13,6 +13,9 @@
 	rel="stylesheet">
 </head>
 <body bgcolor=CadetBlue>
+     <c:if test="${user != 'admin@123'}">
+       <c:redirect url="http://localhost:8200/"></c:redirect>
+     </c:if>
 	<div style="text-align:center; padding:5px;background-color: Teal;">
 	<h1 align="center">Welcome</h1>
 	<h2 align="center">Detais of all the Vehicle Present</h2>

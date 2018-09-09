@@ -2,6 +2,7 @@
     pageEncoding="ISO-8859-1"%>
     <%@ page import="com.example.CabBooking.Cab.Bean.*" %>
     <%@ page import="java.util.*" %>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -9,6 +10,11 @@
 <title>Get All Routes</title>
 </head>
 <body bgcolor=CadetBlue>
+
+       <c:if test="${user != 'admin@123'}">
+       <c:redirect url="http://localhost:8200/"></c:redirect>
+     </c:if>
+
 	<div style="text-align:center; padding:5px;background-color: Teal;">
 	<h1 align="center">Welcome</h1>
 	<h2 align="center">Details of All Routes Present</h2>

@@ -1,5 +1,4 @@
-%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
    
@@ -11,6 +10,9 @@
 <title>Insert title here</title>
 </head>
 <body bgcolor=CadetBlue>
+     <c:if test="${user != 'admin@123'}">
+       <c:redirect url="http://localhost:8200/"></c:redirect>
+     </c:if>
 	<div style="text-align:center; padding:5px;background-color: Teal;">
 	<h1 align="center">Welcome</h1>
 	<h2 align="center">Please enter the vehicle number</h2>

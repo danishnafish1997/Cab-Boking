@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>    
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -49,7 +50,9 @@
 </head>
 <body>
 
-    
+     <c:if test="${user != 'admin@123'}">
+       <c:redirect url="http://localhost:8200/"></c:redirect>
+     </c:if>
 	<div id ="main" style="text-align:center; padding:5px;background-color: Teal;">
 	<h1 align="center" style="margin-top:2%;">Hello Admin</h1>
 	<h1 align="center" style="margin-left:21%;"> Welcome<a href="logout" style="color: #cc0000;font-size:22px; margin-left:18%;">Logout</a></h1>

@@ -13,6 +13,9 @@
 	rel="stylesheet">
 </head>
 <body>
+   <c:if test="${user != 'admin@123'}">
+       <c:redirect url="http://localhost:8200/"></c:redirect>
+     </c:if>
 <div style="text-align:center; padding:5px;background-color: Teal;">
 <h1 align="center">Welcome to Suhana Safar Travel Agency</h1>
 <h2 align="center">All Vehicles details</h2>

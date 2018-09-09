@@ -1,54 +1,35 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-<%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>    
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+
+<c:set var="contextPath" value="${pageContext.request.contextPath}"/>
+
 <html>
 <head>
-<meta charset="ISO-8859-1">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="${contextPath}/resources/css/bootstrap.min.css" rel="stylesheet">
+    <link href="${contextPath}/resources/css/common.css" rel="stylesheet">
 <title>Login Page</title>
-	<style>
-	table{
-	   padding-top: 4%;
-	}
-	td{
-	color: #cc0000;
-	}
-	#link{
-	padding-left: 11%;
-	margin-top: 4%;
-	text-decoration: none;
-	}
-	#submit{
-	margin-top: 5%;
-	margin-bottom: 3%;
-	}
-	body{
-	margin-left: 0px;
-	margin-right:0px;
-	}
-	#heading{
-	font-weight: 600;
-	color: #fff;
-	}
-	</style>
 </head>
-<body bgcolor=CadetBlue>
-	<div class="main" style="text-align:center; padding:5px;background-color: Teal;">
-	<h3 align="center" style="color:660033;">${message}</h3>
-	<h1 id="heading" align="center">Welcome</h1>
+<body >
+	
+	<div class="container">
+	<form action="login" METHOD="POST" class="form-signin">
+	  <div class="form-group ${error != null ? 'has-error' : ''}">
+            <span>${message}</span>
+	      <h2 class="form-heading">Log in</h2><input type="text" name="email" class="form-control" placeholder="Email"
+                   autofocus="true"/>
+	      <input name="password" type="password" class="form-control" placeholder="Password"/>
+            <span>${error}</span>
+	      <button class="btn btn-lg btn-primary btn-block" type="submit">Log In</button>
+            <h4 class="text-center"><a href="${contextPath}/register">Create an account</a></h4>
+	
 	</div>
-	<div>
-	<div style="width: 46%; height:246px; font-size: 20px; background-color:CadetBlue ; color:#fff; float: left; padding: 2%"></div>
-	<div style="width: 46%; height: 246px; text-align:center; background-color:CadetBlue ; color:red; float: right; padding: 2%;">
-	<form action="login" METHOD="POST">
-	<table align="center" cellspacing="5">
-	<tr><td>LoginID</td><td><input type="text" name="email" /></td></tr>
-	<tr><td>Password</td><td><input type="password" name="password"  /></td></tr>
-	<tr><td></td><td><input type="submit" id="submit" value="submit"></td></tr>
-	</table>
 	</form>
-	 <b><a id="link" href="register">New user? Register here</a></b>
 	</div>
-	</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script src="${contextPath}/resources/js/bootstrap.min.js"></script>
 </body>
 </html>
