@@ -1,6 +1,5 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ page import="com.example.CabBooking.Cab.Bean.*" %>
-<%@ page import="java.util.*" %>
+
 <html>
  <head>
   <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
@@ -17,25 +16,25 @@
    <h2 align="center">All Vehicles details</h2>
    </div>
    <br>
-
    <div class="container">
-     <table class="table table-stripped">
-     <thead>
-       <tr>
-         <th>index</th>
-         <th>Date</th>
-       </tr>
-     </thead>
-     <tbody>
-     <c:forEach items="${history}" var="temp" varStatus="count">
-       <tr>
-       <td> ${count.index} </td>
-       <td>${temp.date}</td>
-      </tr> 
-     </c:forEach>
-     </tbody>
+     <table class="table table-striped">
+     <caption>Choose from the List</caption>
+        <thead>
+         <tr>
+          <th> Name</th>
+          <th> Type </th>
+          <th></th>
+         </tr> 
+        </thead>
+        <tbody>
+          <c:forEach items="${vehicles}" var = "vehicle">
+             <tr>
+               <td>${vehicle.vehicleType}</td>
+               <td>${vehicle.vehicleName}</td>
+               <td> <a class="btn btn-primary" href="/confirmBooking">Available</a> </td>
+              </tr>
+          </c:forEach>
+        </tbody>
      </table>
-     <a class="btn btn-primary" href="/CustomerHomePage">Home</a>
    </div>
-   </body>
-   </html>
+</body>

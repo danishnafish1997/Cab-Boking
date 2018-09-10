@@ -8,7 +8,7 @@
 	rel="stylesheet">
 </head>
 <body>
-   <c:if test="${sessionScope.user != null}">
+   <c:if test="${sessionScope.user == null}">
      <c:redirect url="http://localhost:8200/"></c:redirect>
    </c:if>
   <div style="text-align:center; padding:5px;background-color: Teal;">

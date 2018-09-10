@@ -17,25 +17,9 @@
    <h2 align="center">All Vehicles details</h2>
    </div>
    <br>
-
    <div class="container">
-     <table class="table table-stripped">
-     <thead>
-       <tr>
-         <th>index</th>
-         <th>Date</th>
-       </tr>
-     </thead>
-     <tbody>
-     <c:forEach items="${history}" var="temp" varStatus="count">
-       <tr>
-       <td> ${count.index} </td>
-       <td>${temp.date}</td>
-      </tr> 
-     </c:forEach>
-     </tbody>
-     </table>
-     <a class="btn btn-primary" href="/CustomerHomePage">Home</a>
-   </div>
-   </body>
-   </html>
+    <h1 > Thank you</h1>
+    <a class="btn btn-primary" href="/CustomerHomePage">Home</a>
+   </div> 
+  </body>
+</html>  

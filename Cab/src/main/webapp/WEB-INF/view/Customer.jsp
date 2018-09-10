@@ -49,7 +49,7 @@
 </style>
 </head>
 <body>
-   <c:if test="${sessionScope.user != null}">
+   <c:if test="${sessionScope.user == null}">
      <c:redirect url="http://localhost:8200/"></c:redirect>
    </c:if>
    
@@ -72,7 +72,6 @@
 	      <a href="#">Your Profile</a>
 	      <ul>
 	        <li><a href="viewProfile?id=${user}">View Profile</a></li>
-	        <li><a href="editProfile?id=${user}">Edit Profile</a></li>
 	      </ul>
 	    </li>
 	  </ul>

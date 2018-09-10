@@ -10,7 +10,7 @@
 </head>
 <body bgcolor=CadetBlue>
 <div style="text-align:center; padding:5px;background-color: Teal;">
-<h1 align="center">Hello <%=session.getAttribute("loginid") %></h1>
+<h1 align="center">Hello <%=session.getAttribute("user") %></h1>
 <h1 align="center">Welcome</h1>
 </div>
 <h2>${warning }</h2>

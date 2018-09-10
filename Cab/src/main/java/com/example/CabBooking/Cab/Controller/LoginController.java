@@ -49,7 +49,6 @@ public class LoginController {
 		 else if( repo.existsByEmail(email)){
 			 LoginBean user = repo.findByEmail(email);
 			 if(user.getEmail().equals(email) && user.getPassword().equals(password)){
-				 httpSession.setAttribute("emailId", email);
 				 ModelAndView mav = new ModelAndView("Customer");
 				 return mav;
 			 }

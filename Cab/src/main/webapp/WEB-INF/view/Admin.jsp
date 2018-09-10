@@ -44,7 +44,7 @@
 		margin-right: 0px;
 	}
 	.menu li{
-		margin-left: 4%;
+		margin-left: 10%;
 	}
 </style>
 </head>
@@ -76,20 +76,6 @@
 	        <li><a href="getAllDrivers">View Driver</a></li>
 	      </ul>
 	    </li>
-	     <li>
-	      <a href="#">Route</a>
-	      <ul>
-	        <li><a href="getAllRoutes">View Route</a></li>
-	      </ul>
-	    </li>
-	
-	     <li>
-	      <a href="#">Customer</a>
-	      <ul>
-	        <li><a href="Customer">Booked Tickets</a></li>
-	      </ul>
-	    </li>
-	
 	  </ul>
 	</div>
 	 <h1>${Warning}</h1>

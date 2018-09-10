@@ -1,6 +1,8 @@
 package com.example.CabBooking.Cab.Controller;
 
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
@@ -13,16 +15,26 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.example.CabBooking.Cab.Repository.BookingRepository;
+import com.example.CabBooking.Cab.Bean.BookingHistoryBean;
 import com.example.CabBooking.Cab.Bean.LoginBean;
+import com.example.CabBooking.Cab.Bean.VehicleBean;
 import com.example.CabBooking.Cab.Repository.LoginRepository;
+import com.example.CabBooking.Cab.Repository.VehicleRepository;
 
 @RestController
 public class CustomerController {
 
-
+	static int id = 0;
 	
 	@Autowired
 	LoginRepository repo;
+	
+	@Autowired
+	BookingRepository brepo;
+	
+	@Autowired
+	VehicleRepository repository;
 	
 	@RequestMapping(value="/CustomerHomePage",method = RequestMethod.GET)
 	   public ModelAndView CustomerHomePage() {
@@ -47,9 +59,38 @@ public class CustomerController {
 			return mav;
 	   }
 
+	@RequestMapping(value="/search",method=RequestMethod.POST)
+	public ModelAndView search(@RequestParam String vehicleName,@RequestParam String vehicleType ){
+		
+		List<VehicleBean> vehicles =repository.findByVehicleNameAndVehicleType(vehicleName,vehicleType);
+		for(VehicleBean vehicle:vehicles){
+			System.out.println(vehicle.getVehicleName());
+		}
+		ModelAndView mav = new ModelAndView("BookNow");
+		mav.addObject("vehicles", vehicles);
+		return mav;
+	}
 	
+	@RequestMapping(value="/confirmBooking" , method=RequestMethod.GET)
+	public ModelAndView confirmBooking(HttpSession session){
+		LoginBean user = repo.findByEmail(session.getAttribute("user").toString());
+		BookingHistoryBean bookingHistory = new BookingHistoryBean();
+		bookingHistory.setEmail(user.getEmail());
+		bookingHistory.setName(user.getUserName());
+		bookingHistory.setDate(new Date());
+		brepo.save(bookingHistory);
+		ModelAndView mav = new ModelAndView("welcome");
+		return mav;
+	}
 	
-	
+	@RequestMapping(value="/bookingHistory",method = RequestMethod.GET)
+	public ModelAndView bookingHistory(HttpSession session){
+		
+		List<BookingHistoryBean> history = brepo.findByEmail(session.getAttribute("user").toString());
+		ModelAndView mav = new ModelAndView("BookingHistory");
+		mav.addObject("history", history);
+		return mav;
+	}
 	   
 	@RequestMapping(value="/viewProfile",method=RequestMethod.GET)
 	public ModelAndView profile(HttpSession httpSession) {
