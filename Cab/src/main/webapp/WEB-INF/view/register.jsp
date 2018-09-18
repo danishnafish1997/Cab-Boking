@@ -12,7 +12,7 @@
 </head>
 
 <body>
-	<div class="container center" ><br>
+	<div class="container " ><br>
 	<form:form action="registerPage" METHOD="POST" modelAttribute="loginBean" class="form-signin">
 	<form:hidden path="loginid"/>
 	  <h2 class="form-signin-heading">Create your account</h2>

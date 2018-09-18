@@ -34,29 +34,25 @@ public class VehicleController {
 	   }
 	
 	@RequestMapping(value="/AddVehicle", method=RequestMethod.GET)
-	public ModelAndView AddVehicle() {
+	public ModelAndView AddVehicle(ModelMap model) {
+		VehicleBean vehicleBean = new VehicleBean();
+		model.put("vehicleBean", vehicleBean);
 		ModelAndView mav=new ModelAndView("AddVehicle");
 		return mav;
 	}
 @RequestMapping(value="/vehicleMain", method=RequestMethod.POST)
-public ModelAndView vehicleMain(@RequestParam Map<String,String> map) {
-	VehicleBean vehicleBean=new VehicleBean();
-	vehicleBean.setVehicleNumber(map.get("vehicleNumber"));
-	vehicleBean.setVehicleName(map.get("vehicleName"));
-	vehicleBean.setVehicleType(map.get("vehicleType"));
-	String result=vehicleService.AddVehicle(vehicleBean);
-	if(result.equals("SUCCESS")) {
+public ModelAndView vehicleMain(ModelMap model, @Valid VehicleBean vehicle,BindingResult result) {
+	    if(result.hasErrors()){
+	    	ModelAndView mav=new ModelAndView("AddVehicle");
+			return mav;
+	    }
+		vehicleService.AddVehicle(vehicle);
 		ModelAndView mav = new ModelAndView("Admin");
 		 mav.addObject("message", "Vehicle's Details Successfully Added");
 			return mav;
 			
 	}
-	else {
-			ModelAndView mav=new ModelAndView("AddVehicle");
-			mav.addObject("warning", "Please fill the complete details");
-			return mav;	
-	}
-}
+	
 
 @RequestMapping(value="/updateVehicle",method = RequestMethod.GET)
    public ModelAndView updateVehicle(@RequestParam String id,ModelMap model) {
