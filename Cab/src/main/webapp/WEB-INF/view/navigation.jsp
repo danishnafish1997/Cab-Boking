@@ -13,11 +13,11 @@
               </a>
             </li>
             <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" id="navbarDropdownMenuLink" >Booking
+        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" id="navbarDropdownMenuLink" aria-haspopup="true" aria-expanded="false">Booking
         <span class="caret"></span></a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-	        <a class="dropdown-item" href="${contextRoot}/BookCabNow">Book Vehicle Now</a>
-	        <a class="dropdown-item" href="${contextRoot}/bookingHistory">Booking History</a>
+	        <a class="dropdown-item" href="/BookCabNow">Book Vehicle Now</a>
+	        <a class="dropdown-item" href="/bookingHistory">Booking History</a>
 	      </div>
 	    </li>
         <li class="nav-item dropdown">

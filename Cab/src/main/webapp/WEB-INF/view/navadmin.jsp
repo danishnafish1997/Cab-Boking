@@ -16,8 +16,8 @@
         <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="">Vehicles
         <span class="caret"></span></a>
 	      <ul class="dropdown-menu">
-	        <li><a  href="${contextRoot}/AddVehicle">Add Vehicles</a></li>
-	        <li><a  href="${contextRoot}/getAllVehicles">Booking History</a></li>
+	        <li><a  href="/AddVehicle">Add Vehicles</a></li>
+	        <li><a  href="/getAllVehicles">veiw vehicles</a></li>
 	      </ul>
 	    </li>
         <li class="dropdown">

@@ -24,16 +24,15 @@
 	<form:form  action="vehicleMain" METHOD="POST" modelAttribute="vehicleBean">
     <div class="form-group"><form:input type="text" path="vehicleNumber" class="form-control"  placeholder="Vehicle Number" /></div>
 	<div class="form-group"><form:input type="text" path="vehicleName" class="form-control" placeholder="Vehicle Name" /></div>
-	<div class="form-group"><form:input type="radio" path="vehicleType" value="AC"/>AC
-	                       <form:input type="radio" path="vehicleType" value="Non-AC"/>Non-AC</div>
+	<div class="form-group"><form:radiobutton path="vehicleType" value="AC"/>AC
+	                       <form:radiobutton path="vehicleType" value="Non-AC"/>Non-AC</div>
 	<div class="form-group"><input type = "submit" value = "submit" class = "btn btn-primary" /></div>
 
 	</form:form>
 	</div>
 	</div>
-	 <script type="text/javascript">
-	
-       </script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="${contextPath}/resources/bootstrap/js/bootstrap.min.js"></script>
 
 </body>
 </html>

@@ -16,5 +16,8 @@
     <h1 > Thank you</h1>
     <a class="btn btn-primary" href="/CustomerHomePage">Home</a>
    </div> 
+   
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script src="${contextPath}/resources/bootstrap/js/bootstrap.min.js"></script>
   </body>
 </html>  
