@@ -16,7 +16,9 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.example.CabBooking.Cab.Repository.BookingRepository;
+import com.example.CabBooking.Cab.Repository.DriverRepository;
 import com.example.CabBooking.Cab.Bean.BookingHistoryBean;
+import com.example.CabBooking.Cab.Bean.DriverBean;
 import com.example.CabBooking.Cab.Bean.LoginBean;
 import com.example.CabBooking.Cab.Bean.VehicleBean;
 import com.example.CabBooking.Cab.Repository.LoginRepository;
@@ -29,6 +31,9 @@ public class CustomerController {
 	
 	@Autowired
 	LoginRepository repo;
+	
+	@Autowired
+	DriverRepository drepo;
 	
 	@Autowired
 	BookingRepository brepo;
@@ -60,26 +65,27 @@ public class CustomerController {
 	   }
 
 	@RequestMapping(value="/search",method=RequestMethod.POST)
-	public ModelAndView search(@RequestParam String vehicleName,@RequestParam String vehicleType ){
+	public ModelAndView search(){
 		
-		List<VehicleBean> vehicles =repository.findByVehicleNameAndVehicleType(vehicleName,vehicleType);
-		for(VehicleBean vehicle:vehicles){
-			System.out.println(vehicle.getVehicleName());
-		}
+		List<VehicleBean> vehicles =repository.findAll();
 		ModelAndView mav = new ModelAndView("BookNow");
 		mav.addObject("vehicles", vehicles);
 		return mav;
 	}
 	
 	@RequestMapping(value="/confirmBooking" , method=RequestMethod.GET)
-	public ModelAndView confirmBooking(HttpSession session){
+	public ModelAndView confirmBooking(HttpSession session,@RequestParam String id){
 		LoginBean user = repo.findByEmail(session.getAttribute("user").toString());
 		BookingHistoryBean bookingHistory = new BookingHistoryBean();
 		bookingHistory.setEmail(user.getEmail());
 		bookingHistory.setName(user.getUserName());
 		bookingHistory.setDate(new Date());
 		brepo.save(bookingHistory);
-		ModelAndView mav = new ModelAndView("welcome");
+		ModelAndView mav = new ModelAndView("confirm");
+		VehicleBean vehicle = repository.findById(id).get();
+		DriverBean driver = drepo.findByVehicleNumber(id);
+		mav.addObject("driver", driver);
+		mav.addObject("vehicle", vehicle);
 		return mav;
 	}
 	

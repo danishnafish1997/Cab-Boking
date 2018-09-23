@@ -13,8 +13,27 @@
   <%@include file="navigation.jsp" %>
    <br><br><br>
    <div class="container">
-    <h1 > Thank you</h1>
-    <a class="btn btn-primary" href="/CustomerHomePage">Home</a>
+    <table class="table table-primary">
+     <thead>
+       <tr>
+         <th>Driver Id</th> <td>${driver.driverId}</td>
+       </tr>
+       <tr>
+         <th>Driver Name</th> <td>${driver.driverName}</td>
+       </tr>
+       <tr>  
+         <th>Vehicle Number</th><td>${driver.vehicleNumber}</td>
+       </tr>
+        <tr>
+         <th>Vehicle Name</th><td>${vehicle.vehicleName} </td>
+       </tr>
+       <tr>
+         <th>Contact Number</th><td>${driver.driverContactNumber}</td>
+       </tr>
+       <tr></tr>
+     </thead>
+   
+    </table>
    </div> 
    
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
