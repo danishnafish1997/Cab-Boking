@@ -12,8 +12,8 @@
    </c:if>
   <%@include file="navigation.jsp" %>
    <br><br><br>
-   <div class="container">
-    <table class="table table-primary">
+   <div class="container col-lg-5">
+    <table class="table table-responsive-sm table-bordered table-dark">
      <thead>
        <tr>
          <th>Driver Id</th> <td>${driver.driverId}</td>
